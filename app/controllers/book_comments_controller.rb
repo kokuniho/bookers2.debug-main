@@ -1,19 +1,21 @@
 class BookCommentsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     book = Book.find(params[:book_id])
-    comment = current_user.book_comments.new(book_comment_params)
-    comment.book_id = book.id
-    comment.save
-    redirect_to request.referer
+    @comment =  current_user.book_comments.new(book_comment_params)
+    @comment.book_id = book.id
+    if @comment.save
+    end
+    # unless @book_comment.save
+    # render 'error'
+
   end
 
   def destroy
-    @book = Book.find(params[:book_id])
-    book_comment = @book.book_comments.find(params[:id])
-    # 上2行と同じ意味：BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
-    book_comment.destroy
-    redirect_to request.referer
+    @comment = BookComment.find_by(id: params[:id], book_id: params[:book_id])
+    @comment.destroy
+    # redirect_to request.referer
   end
 
   private
