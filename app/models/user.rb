@@ -13,6 +13,7 @@ class User < ApplicationRecord
   # そのユーザがフォローしている人orフォローされている人の一覧を出したい
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
+  scope :evaluate, -> {order(evaluation: :DESC)}
 
   has_one_attached :profile_image
 

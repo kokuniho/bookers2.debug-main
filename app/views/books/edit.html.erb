@@ -10,7 +10,36 @@
         </div>
         <% end %>
   		<h1>Editing Book</h1>
-  		<%= render 'form', book: @book %>
+  		<!--%= render 'form', book: @book %>-->
+
+  		<%= form_with model: @book, local:true do |f| %>
+
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title, class: 'form-control book_title' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :opinion %>
+          <%= f.text_area :body, class: 'form-control book_body' %>
+        </div>
+        <div class="evaluation-rate<%= @book.id %>"></div>
+        <div class="form-group">
+         <%= f.submit class: 'btn btn-success' %>
+        </div>
+
+         <script>
+            $('.evaluation-rate<%= @book.id %>').raty({
+              size      : 36,
+              starOff   : '<%= asset_path('star-off.png') %>',
+              starOn    : '<%= asset_path('star-on.png') %>',
+              half      : false,
+              readOnly: true,
+              score: '<%= @book.evaluation %>',
+            });
+          </script>
+      <% end %>
+
+
   		<%= link_to 'Show', @book, class: "book_#{@book.id}" %> |
   		<%= link_to 'Back', books_path, class: "back" %>
     </div>

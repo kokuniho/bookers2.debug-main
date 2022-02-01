@@ -11,9 +11,14 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    if params[:sort_create]
+      @books = Book.all.order(created_at: :desc)
+    else params[:sort_evaluation]
+      @books = Book.all.order("evaluation DESC")
+    end
+    @books = @books.order(params[:change])
     @book=Book.new
     @user=current_user
-
   end
 
   def create
@@ -33,6 +38,7 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+
   end
 
   def update
@@ -42,6 +48,10 @@ class BooksController < ApplicationController
     else
       render "edit"
     end
+
+    # if evaluation_count < 1
+    #     @evaluation.save
+    # end
   end
 
   def destroy
@@ -53,7 +63,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body, :evaluation)
   end
 
   def ensure_correct_user
@@ -63,3 +73,11 @@ class BooksController < ApplicationController
     end
   end
 end
+
+
+
+
+
+
+
+

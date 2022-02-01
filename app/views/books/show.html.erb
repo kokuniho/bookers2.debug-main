@@ -19,6 +19,17 @@
           <td><%= @book.body %></td>
           <td id="favorite_buttons_<%= @book.id %>"><%= render "favorites/favorite-btn", book: @book %></td>
          　<td calss="book-comments-counter"><%= render "book_comments/counter", book: @book %></td>
+         　 <td class="evaluation-rate<%=@book.id %>"></td>
+         　  <script>
+              $('.evaluation-rate<%= @book.id %>').raty({
+                size      : 36,
+                starOff   : '<%= asset_path('star-off.png') %>',
+                starOn    : '<%= asset_path('star-on.png') %>',
+                half      : false,
+                readOnly: true,
+                score: '<%= @book.evaluation %>',
+              });
+            </script>
 
            <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
@@ -29,7 +40,7 @@
        <div class="book-comments-cmt">
        <%= render 'book_comments/cmt', book: @book %>
        </div>
-       
+
        <%= render 'book_comments/form', book: @book, book_comment: @book_comment %>
 
     </div>
