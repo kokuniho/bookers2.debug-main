@@ -35,6 +35,7 @@
               <th></th>
               <th>Title</th>
               <th>Opinion</th>
+              <th>Category</th>
               <th colspan="3"></th>
             </tr>
            </thead>
@@ -43,6 +44,9 @@
           　     <td><%= image_tag book.user.get_profile_image, size:'100x100' %></td>
                 <td><%= book.title %></td>
                 <td><%= book.body %></td>
+                <td><% book.tags.each do |tag| %>
+                    <%= tag.tag_name %>
+                    <% end %></td>
               </tr>
             <% end %>
           </tbody>

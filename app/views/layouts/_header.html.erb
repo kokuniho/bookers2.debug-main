@@ -19,7 +19,7 @@
             <% end %>
           </li>
           <li>
-            <%=  link_to books_path ,class: 'nav-link text-light' do %>
+            <%= link_to books_path, class: 'nav-link text-light' do %>
               <i class="fas fa-book-open"></i> Books
             <% end %>
           </li>
@@ -28,6 +28,7 @@
               <i class="fas fa-sign-out-alt"></i> logout
             <% end %>
           </li>
+          <li><%= render "searches/tag_form" %></li>
         <% else %>
           <li>
             <%= link_to root_path, class: 'nav-link text-light' do %>
