@@ -3,10 +3,10 @@
       <% book.book_comments.each do |book_comment| %>
       　<tr>
 
-          <td><%= link_to user_path(book_comment.user) do %>
+           <td><%= link_to user_path(book_comment.user) do %>
             <%= image_tag book_comment.user.get_profile_image, size: ("100x100") %>
             <!--get_profile_image("100x100")これではだめ　usersの画像を読み込んでしまう-->
-          </td>
+           </td>
            <td><%= book_comment.user.name %></td>
           <% end %>
            <td><%= book_comment.comment %></td>
